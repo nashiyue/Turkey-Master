@@ -14,10 +14,10 @@
 	</property>
 	<property>
 		<name>WEB_PORT</name>
-		<value>2015</value>
+		<value>8081</value>
 	</property>
 	<property>
 		<name>SLAVE_PORT</name>
-		<value>2016</value>
+		<value>20160</value>
 	</property>
 </conf>

@@ -3,11 +3,12 @@ package iie.master.preference;
 public class Preference {
 	private Preference(){}	
 	
-	public static String DEFAULT_RESULT_PATH = "results";
-	public static String DEFAULT_LOG_PATH = "logs";
-	public static String DEFAULT_TMP_PATH = "tmp";
-	public static int DEFAULT_WEB_PORT = 2015;
-	public static int DEFAULT_SLAVE_PORT = 2016;
+	private static final String DEFAULT_RESULT_PATH = "results";
+	private static final String DEFAULT_LOG_PATH = "logs";
+	private static final String DEFAULT_TMP_PATH = "tmp";
+	private static final int DEFAULT_WEB_PORT = 2015;
+	private static final int DEFAULT_SLAVE_PORT = 2016;
+	private static final int DEFAULT_TIME_OUT = 30000;
 	
 	public static String getResultPath() {
 		return resultPath;
@@ -34,7 +35,19 @@ public class Preference {
 	private static String tmpPath = DEFAULT_TMP_PATH;
 	private static int webPort = DEFAULT_WEB_PORT;
 	private static int slavePort = DEFAULT_SLAVE_PORT;
+	private static int timeOut = DEFAULT_TIME_OUT;
 
+	public static void show(){
+		System.out.println("...........Master Preference...............");
+		System.out.println("Result Paths: "+resultPath);
+		System.out.println("Log Path: "+logPath);
+		System.out.println("Tmp Path: "+tmpPath);
+		System.out.println("Web Port: "+webPort);
+		System.out.println("Slave Port: "+slavePort);
+		System.out.println("Time Out:"+timeOut);
+		System.out.println();
+	}
+	
 	public static void setResultPath(String resultPath) {
 		Preference.resultPath = resultPath;
 	}
@@ -53,5 +66,13 @@ public class Preference {
 
 	public static void setSlavePort(int slavePort) {
 		Preference.slavePort = slavePort;
+	}
+
+	public static int getTimeOut() {
+		return timeOut;
+	}
+
+	public static void setTimeOut(int timeOut) {
+		Preference.timeOut = timeOut;
 	}
 }

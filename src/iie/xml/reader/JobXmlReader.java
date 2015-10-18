@@ -1,11 +1,12 @@
 package iie.xml.reader;
 
-import java.util.Iterator;
-
 import iie.base.definition.Allows;
 import iie.base.definition.Job;
 import iie.base.definition.Param;
 import iie.base.definition.Task;
+import iie.utils.logger.TLogger;
+
+import java.util.Iterator;
 
 import org.dom4j.Element;
 
@@ -21,6 +22,10 @@ public class JobXmlReader extends XmlReader{
 	public void init(String path) throws Exception {
 		job = new Job();
 		super.init(path);
+	}
+	
+	public void recordJobInfo(String jobInfo){
+		TLogger.debug(getClass().getName(), job.toString());
 	}
 	
 	public Job getJob() throws Exception{
@@ -41,6 +46,7 @@ public class JobXmlReader extends XmlReader{
 				}
 			}
 		}
+		recordJobInfo(job.toString());
 		return job;
 	}
 	
@@ -97,12 +103,15 @@ public class JobXmlReader extends XmlReader{
 		}
 	}
 	
-	public static void main(String[] args) throws Exception {
-		JobXmlReader reader = new JobXmlReader();
-		reader.init("/home/liuwei/job.xml");
-		reader.showJob();
-		
-		reader.getJob();
-		reader.showJob();
-	}
+//	public static void main(String[] args) {
+//		JobXmlReader reader = new JobXmlReader();
+//		try {
+//			reader.init("/home/liuwei/job12.xml");
+//			reader.showJob();
+//			reader.getJob();
+//		} catch (Exception e) {
+//			TLogger.error(JobXmlReader.class, e.toString());
+//			e.printStackTrace();
+//		}		
+//	}
 }

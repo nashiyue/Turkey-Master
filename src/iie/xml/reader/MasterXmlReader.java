@@ -40,5 +40,11 @@ public class MasterXmlReader extends XmlReader{
 			throw new Exception("Xml format is error:"+property);
 		}
 	}
+	
+//	public static void main(String[] args) throws Exception {
+//		MasterXmlReader reader = new MasterXmlReader();
+//		reader.init("conf/conf.xml");
+//		Preference.show();
+//	}
 
 }
