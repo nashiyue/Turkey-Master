@@ -4,7 +4,12 @@ import iie.master.preference.Preference;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
-
+/**
+ * @function MHttpServer 是接收Http请求，相应查询master　以往的job信息的类
+ * 具体的相应过程，{@link MHttpHandler#handle(String, org.eclipse.jetty.server.Request, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}
+ * @author liuwei
+ * @version 1.0
+ * */
 public class MHttpServer {
 
 	private Server server;

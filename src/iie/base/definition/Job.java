@@ -2,9 +2,13 @@ package iie.base.definition;
 
 import iie.master.preference.Preference;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Job {
+public class Job implements Serializable{
+
+	private static final long serialVersionUID = -6469411926381381205L;
+
 	//Job优先级的最大值
 	public static final int PRIORITY_MAX = 10;
 	
