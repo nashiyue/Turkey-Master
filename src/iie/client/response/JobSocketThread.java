@@ -1,6 +1,9 @@
 package iie.client.response;
 
+import iie.base.definition.Job;
+import iie.info.manager.JobPriorityQueue;
 import iie.master.preference.Preference;
+import iie.xml.reader.JobXmlReader;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -13,6 +16,8 @@ import java.net.Socket;
  * */
 public class JobSocketThread implements Runnable {
 
+	public static final String JOB_XML = "job.xml";
+	
 	private Socket socket;
 
 	public JobSocketThread(Socket socket) {
@@ -46,6 +51,19 @@ public class JobSocketThread implements Runnable {
 			outputStream.flush();
 			outputStream.close();
 			
+			//读取job的配置文件信息，并将job加入到job队列
+			if(name.toLowerCase().equals(JOB_XML)){
+				JobXmlReader reader = new JobXmlReader(id);
+				try {
+					reader.init(path+File.separator+name);
+					Job job = reader.getJob();
+					if(job != null){						
+						JobPriorityQueue.getInstance().addJob(job);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -18,9 +18,16 @@ public class JobXmlReader extends XmlReader{
 	
 	private Job job;
 	
+	public JobXmlReader() {
+		job = new Job();
+	}
+	
+	public JobXmlReader(long id){
+		job = new Job(id);
+	}
+	
 	@Override
 	public void init(String path) throws Exception {
-		job = new Job();
 		super.init(path);
 	}
 	

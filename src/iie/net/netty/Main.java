@@ -8,5 +8,8 @@ public class Main {
 //		TLogger.debug("iie.net.netty.Main", "Netty Class");
 		System.out.println(System.getProperty("user.home"));
 		System.out.println(File.separator);
+		
+		String xml = "job.xml";
+		System.out.println("Job.Xml".toLowerCase().equals(xml));
 	}
 }

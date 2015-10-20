@@ -1,4 +1,4 @@
-package iie.manager.server;
+package iie.web.server;
 
 import iie.master.preference.Preference;
 

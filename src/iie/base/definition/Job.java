@@ -2,12 +2,9 @@ package iie.base.definition;
 
 import iie.master.preference.Preference;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Job implements Serializable{
-
-	private static final long serialVersionUID = -6469411926381381205L;
+public class Job {
 
 	//Job优先级的最大值
 	public static final int PRIORITY_MAX = 10;
@@ -19,7 +16,7 @@ public class Job implements Serializable{
 	public static final int PRIORITY_DEFAULT = 5;
 	
 	//Master根据系统时间分配的JobID
-	private String jobId;
+	private long jobId;
 	
 	//本次job全局运行的jar文件
 	private String runJar;
@@ -51,7 +48,7 @@ public class Job implements Serializable{
 		return taskList.get(index);
 	}
 	
-	public String getJobId() {
+	public long getJobId() {
 		return jobId;
 	}
 
@@ -99,15 +96,14 @@ public class Job implements Serializable{
 	}
 
 	public Job() {
+		this(System.currentTimeMillis());
+	}
+	
+	public Job(long id){
 		taskList = new LinkedList<Task>();
 		priority = PRIORITY_DEFAULT;
 		setResultPath(Preference.getResultPath());
-		jobId = initJobId();
-	}
-	
-	private String initJobId(){
-		String id = "Job";
-		return id+System.currentTimeMillis();
+		jobId = id;
 	}
 	
 	@Override
@@ -119,5 +115,16 @@ public class Job implements Serializable{
 			result = result + task.toString()+"\n";
 		}
 		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) return false;
+		if(obj instanceof Job){
+			return this.getJobId() == ((Job)obj).getJobId() ? true:false;
+		}
+		else{
+			return false;
+		}
 	}
 }

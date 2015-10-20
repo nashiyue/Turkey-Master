@@ -13,6 +13,7 @@ public class Preference {
 	private static final int DEFAULT_SLAVE_PORT = 2016;
 	private static final int DEFAULT_CLIENT_PORT = 2017;
 	private static final int DEFAULT_TIME_OUT = 30000;
+	private static final int DEFAULT_SLEEP_TIME = 3000;
 	
 	public static String getResultPath() {
 		return resultPath;
@@ -41,6 +42,7 @@ public class Preference {
 	private static int slavePort = DEFAULT_SLAVE_PORT;
 	private static int clientPort = DEFAULT_CLIENT_PORT;
 	private static int timeOut = DEFAULT_TIME_OUT;
+	private static int sleepTime = DEFAULT_SLEEP_TIME;
 
 	public static void show(){
 		System.out.println("...........Master Preference...............");
@@ -92,5 +94,13 @@ public class Preference {
 	
 	public static void main(String[] args) {
 		show();
+	}
+
+	public static int getSleepTime() {
+		return sleepTime;
+	}
+
+	public static void setSleepTime(int sleepTime) {
+		Preference.sleepTime = sleepTime;
 	}
 }
