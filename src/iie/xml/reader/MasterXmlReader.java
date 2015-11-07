@@ -10,7 +10,9 @@ public class MasterXmlReader extends XmlReader{
 	public static final String LOG_PATH = "LOG_PATH";
 	public static final String TMP_PATH = "TMP_PATH";
 	public static final String WEB_PORT = "WEB_PORT";
-	public static final String SLAVE_PORT = "SLAVE_PORT";
+	public static final String CONTROL_PORT = "CONTROL_PORT";
+	public static final String UPLOAD_PORT = "UPLOAD_PORT";
+	public static final String DOWNLOAD_PORT = "DOWNLOAD_PORT";
 
 	@Override
 	protected void handle(Element property) throws Exception {
@@ -29,8 +31,14 @@ public class MasterXmlReader extends XmlReader{
 			else if(name.equals(WEB_PORT)){
 				Preference.setWebPort(Integer.valueOf(value));
 			}
-			else if(name.equals(SLAVE_PORT)){
-				Preference.setSlavePort(Integer.valueOf(value));
+			else if(name.equals(CONTROL_PORT)){
+				Preference.setMasterControlPort(Integer.valueOf(value));
+			}
+			else if(name.equals(DOWNLOAD_PORT)){
+				Preference.setMasterDownloadPort(Integer.valueOf(value));
+			}
+			else if(name.equals(UPLOAD_PORT)){
+				Preference.setMasterUploadPort(Integer.valueOf(value));
 			}
 			else{
 				
