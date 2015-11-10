@@ -16,6 +16,7 @@ public class MHttpServer {
 	private ServerConnector connector;
 
 	public MHttpServer(String host, int port, int timeout) {
+		System.out.println("MHttp server is listening in port:"+port);
 		server = new Server();
 		connector = new ServerConnector(server);
 		connector.setHost(host);
@@ -46,8 +47,8 @@ public class MHttpServer {
 		connector.close();
 	}
 	
-	public static void main(String[] args) throws Exception {
-		MHttpServer server = new MHttpServer(8080);
-		server.start();
-	}
+//	public static void main(String[] args) throws Exception {
+//		MHttpServer server = new MHttpServer(8080);
+//		server.start();
+//	}
 }

@@ -17,6 +17,7 @@ public class JobConsumerThread extends Thread {
 
 	@Override
 	public void run() {
+		System.out.println("Server 在监听job队列....");
 		while (isOn) {
 			if (!JobPriorityQueue.getInstance().isEmpty()) {
 				Job job = JobPriorityQueue.getInstance().poll();
@@ -36,9 +37,15 @@ public class JobConsumerThread extends Thread {
 	private void execute(Job job) {
 		for (int i = 0; i < job.getTaskSize(); i++) {
 			Task task = job.getTask(i);
-			ControlMessage message = new ControlMessage(Preference.MASTER_ID,
+			ControlMessage message = new ControlMessage(job.getJobId()+"",
 					task.getBladeName(), ControlMessage.TYPE_TASK_CONTROL, task.toString());
-			ControlServerChannelManager.send(message);
+			boolean isSuccess = ControlServerChannelManager.send(message);
+			if(!isSuccess){
+				System.out.println("JobConsumer send control message failed:"+message);
+			}
+		}
+		for(int i = 0; i< job.getTaskSize(); i++){			
+			System.out.println("Master dispatch task: "+ job.getTask(i));
 		}
 	}
 

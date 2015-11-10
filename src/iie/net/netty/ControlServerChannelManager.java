@@ -16,7 +16,7 @@ public class ControlServerChannelManager {
 		for(Channel ch : ControlServerHandler.channels) {
 			if(ch.remoteAddress().toString().equals(message.getTo())) {
 				ch.writeAndFlush(message+"\r\n");
-				System.out.println("server write and flush:"+message);
+//				System.out.println("server write and flush:"+message);
 				isSuccess = true;
 			}
 		}

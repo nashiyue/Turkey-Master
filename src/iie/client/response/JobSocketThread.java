@@ -30,7 +30,7 @@ public class JobSocketThread implements Runnable {
 			DataInputStream inputStream = new DataInputStream(socket.getInputStream());
 			long id = inputStream.readLong();
 			String name = inputStream.readUTF();
-			System.out.println("receive file:"+name+"....");
+			System.out.println("receive client file:"+name+"....");
 			String path = Preference.getTmpPath()+File.separator+id;
 			File dir = new File(path);
 			if(!dir.exists()){

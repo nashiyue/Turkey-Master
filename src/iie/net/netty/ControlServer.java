@@ -36,6 +36,7 @@ public class ControlServer extends Thread{
 	public ControlServer(int port){
 		this.port = port;
 		isRun = true;
+		System.out.println("Control Server is listening in port:"+port);
 	}
 	
 	@Override
@@ -94,8 +95,8 @@ public class ControlServer extends Thread{
 		}
 	}
 	
-	public static void main(String[] args) {
-		int port = 8080;
-		new ControlServer(port).start();
-	}
+//	public static void main(String[] args) {
+//		int port = 8080;
+//		new ControlServer(port).start();
+//	}
 }

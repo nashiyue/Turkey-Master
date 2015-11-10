@@ -1,0 +1,31 @@
+<job>
+	<property>
+		<name>RUN_JAR</name>
+		<method>client.jar</method>
+	</property>
+	
+	<property>
+		<name>MERGE_POLICY</name>
+		<method>POLICY.NUMBER_ADD</method>
+	</property>
+	
+	<property>
+		<name>TOTAL_RESULT_PATH</name>
+		<method>/home/liuwei/Desktop</method>
+	</property>
+	
+	
+	<property>
+		<name>blade1</name>
+		<method>iie.client.net.Client</method>
+		<params type="f">/home/hadoop/liuwei</params>
+	</property>
+	
+	<property>
+		<name>blade2</name>
+		<method>iie.client.net.Client</method>
+		<params type="f">/home/hadoop/liuwei</params>
+	</property>
+	
+	
+</job>

@@ -25,10 +25,18 @@ public class JobChecker {
 					+ job.getJobId() + File.separator;
 			for (int i = 0; i < size; i++) {
 				String jar = job.getTask(i).getJarName();
-				if (!new File(base + jar).exists()) {
-					TLogger.error("iie.base.definition.JobChecker",
-							jarMissMsg(job.getJobId(), jar));
-					return false;
+				File jarFile = new File(base+jar);
+				if(!jarFile.exists()){
+					try {
+						Thread.sleep(Preference.getTimeOut());
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if(!jarFile.exists()){
+						TLogger.error("iie.base.definition.JobChecker",
+								jarMissMsg(job.getJobId(), base+jar));
+						return false;						
+					}
 				}
 			}
 		}

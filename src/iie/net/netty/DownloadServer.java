@@ -17,7 +17,7 @@ public class DownloadServer extends Thread {
 	private int port;
 	
 	public DownloadServer(){
-		this(Preference.getMasterUploadPort());
+		this(Preference.getMasterDownloadPort());
 	}
 	
 	public DownloadServer(int port) {

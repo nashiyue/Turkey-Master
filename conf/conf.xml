@@ -2,22 +2,34 @@
 <conf>
 	<property>
 		<name>MERGE_RESULT_PATH</name>
-		<value>/home/hadoop/Turkey/results</value>
+		<value>/home/liuwei/Turkey/results</value>
 	</property>
 	<property>
 	    <name>LOG_PATH</name>
-	    <value>/home/hadoop/Turkey/logs</value>
+	    <value>/home/liuwei/Turkey/logs</value>
 	</property>
 	<property>
 	    <name>TMP_PATH</name>
-	    <value>/home/hadoop/Turkey/tmp</value>
+	    <value>/home/liuwei/Turkey/tmp</value>
 	</property>
 	<property>
 		<name>WEB_PORT</name>
 		<value>8081</value>
 	</property>
 	<property>
-		<name>SLAVE_PORT</name>
-		<value>20160</value>
+		<name>CONTROL_PORT</name>
+		<value>8082</value>
+	</property>
+	<property>
+		<name>UPLOAD_PORT</name>
+		<value>8083</value>
+	</property>
+	<property>
+		<name>DOWNLOAD_PORT</name>
+		<value>8084</value>
+	</property>
+	<property>
+		<name>CLIENT_PORT</name>
+		<value>8085</value>
 	</property>
 </conf>

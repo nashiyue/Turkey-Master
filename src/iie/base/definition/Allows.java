@@ -9,8 +9,8 @@ public class Allows {
 	public static final String FLAG_YES = "yes";
 	public static final String FLAG_PRIORITY = "priority";
 	
-	private static String sep_flag =":";
-	private static String sep_blade=",";
+	private static String sep_flag ="=";
+	private static String sep_blade="-";
 	
 	private boolean isAllow;
 	
@@ -19,10 +19,15 @@ public class Allows {
 	private String flag;
 
 	private LinkedList<String> bladeList;
-	
+	/**
+	 * 这个content是指<allow name="" value="">content</allow>里面的
+	 * */
 	public void setAllowContent(String content) throws Exception{
 		String[] array = content.split(sep_flag);
 		if(array.length != 2){
+//			for(int i=0; i<array.length; i++){
+//				System.out.println("["+array[i]+"]");
+//			}
 			throw new Exception("Allow content is error:"+content);
 		}
 		else{
@@ -36,6 +41,37 @@ public class Allows {
 			}
 		}
 	}
+	
+	public static Allows getInstance(String content) throws Exception{
+		String[] array = content.split(" ");
+		Allows allows = new Allows();
+		String[] arrs = null;
+		for(int i =0;i<array.length; i++){
+			arrs = array[i].split("=");
+			if(arrs.length == 2){
+				switch (arrs[0]) {
+				case "name":
+					allows.setName(arrs[1]);
+					break;
+				case "value":
+					allows.setValue(arrs[1]);
+					break;
+				case "yes":
+					allows.setAllowContent(array[i]);
+					break;
+				case "priority":
+					allows.setAllowContent(array[i]);
+					break;
+				default:
+					break;
+				}
+			}
+			else{
+				throw new Exception("Allow format is error:"+array[i]);
+			}
+		}
+		return allows;
+	} 
 	
 	public int getBladeSize(){
 		return bladeList.size();
@@ -106,15 +142,15 @@ public class Allows {
 
 	@Override
 	public String toString() {
-		String result = "allow:name="+name+"; value="+value+"; "+flag+":";
+		String result = "allow:name="+name+" value="+value+" "+flag+sep_flag;
 		if (isAllow) {
 			for(String s: bladeList){
-				result= result + "["+s+"] ";
+				result= result +s+sep_blade;
 			}
 		}
 		else{
 			return "allow:no";
 		}
-		return result;
+		return result.substring(0, result.length()-1);
 	}
 }

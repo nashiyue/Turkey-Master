@@ -18,6 +18,46 @@ public class Task {
 	//如果允许Task分发到其他节点，则其条件和具体信息
 	private Allows allows;
 	
+	public static Task getInstance(String toStringContent) throws Exception{
+		Task task = new Task();
+		String[] contents = toStringContent.split(",");
+		for(String line:contents){
+			String[] kv = line.split(":",2);
+			try {
+				switch (kv[0]) {
+				case "blade":
+					task.setBladeName(kv[1]);
+					break;
+				case "jar":
+					task.setJarName(kv[1]);
+					break;
+				case "class":
+					task.setClassName(kv[1]);
+					break;
+				case "params":
+					String[] params = kv[1].split(" ");
+					for(String p :params){
+						task.addParam(Param.getInstance(p));
+					}
+					break;
+				case "allow":
+					if(kv[1].trim().equals("no")){
+						task.setAllows(new Allows());
+					}
+					else{
+						task.setAllows(Allows.getInstance(kv[1]));						
+					}
+					break;
+				default:
+					break;
+				}
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		return task;
+	}
+	
 	public int getParamSize(){
 		return paramList.size();
 	}
@@ -31,6 +71,10 @@ public class Task {
 			return null;
 		}
 		return paramList.get(index);
+	}
+	
+	private Task(){
+		paramList = new LinkedList<Param>();
 	}
 	
 	public Task(String bladeName){
@@ -67,16 +111,19 @@ public class Task {
 	}
 
 	public void setAllows(Allows allows) {
+		if(allows == null){
+			this.allows = new Allows();
+		}
 		this.allows = allows;
 	}
 	
 	@Override
 	public String toString() {
-		String result =  "blade:"+bladeName+" jar:"+jarName+" class:"+className +" params:";
+		String result =  "blade:"+bladeName+",jar:"+jarName+",class:"+className +",params:";
 		for(Param p : paramList){
-			result = result + p.key +" "+p.value+" ";
+			result = result + p.key +"="+p.value+" ";
 		}
-		result += allows.toString();
+		result += ","+allows.toString();
 		return result;
 	}
 }
