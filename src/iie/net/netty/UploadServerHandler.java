@@ -1,5 +1,6 @@
 package iie.net.netty;
 
+import iie.base.definition.TaskCounterManager;
 import iie.master.preference.Preference;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -58,7 +59,8 @@ public class UploadServerHandler extends SimpleChannelInboundHandler<HttpObject>
     public static final int HTTP_CACHE_SECONDS = 60;
     
     static {
-        DiskFileUpload.baseDirectory = Preference.getTmpPath()+File.separator;
+//        DiskFileUpload.baseDirectory = Preference.getTmpPath()+File.separator;
+        DiskFileUpload.baseDirectory = Preference.getResultPath()+File.separator;
     }
 
     @Override
@@ -155,10 +157,17 @@ public class UploadServerHandler extends SimpleChannelInboundHandler<HttpObject>
         if (data.getHttpDataType() == HttpDataType.FileUpload) {
             FileUpload fileUpload = (FileUpload) data;
             if (fileUpload.isCompleted()) {
+            	String jobId = uri.substring("result_".length());
+            	TaskCounterManager.getInstance().receive(jobId);
+            	int count = TaskCounterManager.getInstance().getReceiveCount(jobId);
             	
 				StringBuffer fileNameBuf = new StringBuffer();
-				fileNameBuf.append(DiskFileUpload.baseDirectory)
-		                   .append(uri);
+				File dir = new File(DiskFileUpload.baseDirectory+jobId);
+				if(!dir.exists()){
+					dir.mkdirs();
+				}
+				fileNameBuf.append(DiskFileUpload.baseDirectory+jobId+File.separator)
+		                   .append(uri).append("_"+count);
 				System.out.println("fileNamebuf:"+fileNameBuf.toString()+"......");
 				fileUpload.renameTo(new File(fileNameBuf.toString()));
             }

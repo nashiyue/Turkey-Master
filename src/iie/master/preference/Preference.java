@@ -12,11 +12,11 @@ public class Preference {
 	private static final String DEFAULT_LOG_PATH = DEFAULT_BASE_PATH+File.separator+"logs";
 	private static final String DEFAULT_TMP_PATH = DEFAULT_BASE_PATH+File.separator+"tmps";
 	
-	private static final int DEFAULT_WEB_PORT = 2015;
-	private static final int DEFAULT_CONTROL_PORT = 2016;
-	private static final int DEFAULT_UPLOAD_PORT = 2017;
-	private static final int DEFAULT_DOWNLOAD_PORT = 2018;
-	private static final int DEFAULT_CLIENT_PORT = 2019;
+	private static final int DEFAULT_WEB_PORT = 8081;
+	private static final int DEFAULT_CONTROL_PORT = 8082;
+	private static final int DEFAULT_UPLOAD_PORT = 8083;
+	private static final int DEFAULT_DOWNLOAD_PORT = 8084;
+	private static final int DEFAULT_CLIENT_PORT = 8085;
 	private static final int DEFAULT_TIME_OUT = 30000;
 	private static final int DEFAULT_SLEEP_TIME = 3000;
 	

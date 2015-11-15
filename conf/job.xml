@@ -25,6 +25,7 @@
 		<name>blade2</name>
 		<method>iie.client.net.Client</method>
 		<params type="f">/home/hadoop/liuwei</params>
+		<params >gfvjhgj</params>
 	</property>
 	
 	

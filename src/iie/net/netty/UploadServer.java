@@ -77,7 +77,7 @@ public class UploadServer extends Thread {
             // 服务器绑定端口监听
             ChannelFuture f = b.bind(port).sync();
             
-            System.out.println("数据服务："+port+"启动完成...");
+            System.out.println("UploadServer："+port+"启动完成...");
             // 监听服务器关闭监听
             f.channel().closeFuture().sync();
         } finally {
@@ -86,9 +86,9 @@ public class UploadServer extends Thread {
         }
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("start server.....");
-//		new DBServer().start();
-		UploadServer.newBuild().start();
-	}
+//	public static void main(String[] args) {
+//		System.out.println("start server.....");
+////		new DBServer().start();
+//		UploadServer.newBuild().start();
+//	}
 }

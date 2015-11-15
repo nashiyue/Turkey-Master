@@ -57,7 +57,7 @@ public class DownloadServer extends Thread {
             // 服务器绑定端口监听
             ChannelFuture f = b.bind(port).sync();
             
-            System.out.println("数据服务："+port+"启动完成...");
+            System.out.println("DownloadServer："+port+"启动完成...");
             // 监听服务器关闭监听
             f.channel().closeFuture().sync();
         } finally {

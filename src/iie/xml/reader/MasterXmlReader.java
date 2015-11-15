@@ -14,7 +14,7 @@ public class MasterXmlReader extends XmlReader{
 	public static final String CONTROL_PORT = "CONTROL_PORT";
 	public static final String UPLOAD_PORT = "UPLOAD_PORT";
 	public static final String DOWNLOAD_PORT = "DOWNLOAD_PORT";
-
+	
 	@Override
 	protected void handle(Element property) throws Exception {
 		if(property.getName().equals("property")){

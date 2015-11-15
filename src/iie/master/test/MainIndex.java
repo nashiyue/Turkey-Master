@@ -5,6 +5,7 @@ import iie.info.manager.JobConsumerThread;
 import iie.master.preference.Preference;
 import iie.net.netty.ControlServer;
 import iie.net.netty.DownloadServer;
+import iie.net.netty.UploadServer;
 import iie.xml.reader.MasterXmlReader;
 
 import java.io.IOException;
@@ -18,9 +19,16 @@ public class MainIndex {
 	}
 	
 	public static void main(String[] args) throws IOException {
+		System.out.println(System.getProperty("java.class.path"));
+		if(args.length < 1){
+			System.out.println("Input Master conf path");
+			return;
+		}
+		
 		boolean isInitSuccessful = false;
 		try {
-			initMaster("conf/conf.xml");
+//			initMaster("conf/conf.xml");
+			initMaster(args[0]);
 			isInitSuccessful = true;
 		} catch (Exception e) {
 			System.out.println("Master 配置文件出错...."+e.getMessage());
@@ -58,6 +66,8 @@ public class MainIndex {
 			DownloadServer downloadServer = new DownloadServer();
 			downloadServer.start();
 			//打开和slave交互的 result 上传端口
+			UploadServer uploadServer = UploadServer.newBuild(Preference.getMasterUploadPort());
+			uploadServer.start();
 		}
 		
 	}

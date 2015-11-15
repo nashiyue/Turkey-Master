@@ -1,5 +1,7 @@
 package iie.utils.logger;
 
+import iie.master.preference.Preference;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -8,7 +10,7 @@ public class TLogger {
 	private TLogger(){}
 	
 	static{
-		PropertyConfigurator.configure("log4j.properties");
+		PropertyConfigurator.configure(Preference.getLogPath());
 	}
 	
 	@SuppressWarnings("rawtypes")

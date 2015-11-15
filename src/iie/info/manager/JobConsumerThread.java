@@ -3,6 +3,7 @@ package iie.info.manager;
 import iie.base.definition.Job;
 import iie.base.definition.JobChecker;
 import iie.base.definition.Task;
+import iie.base.definition.TaskCounterManager;
 import iie.master.preference.Preference;
 import iie.net.netty.ControlMessage;
 import iie.net.netty.ControlServerChannelManager;
@@ -35,6 +36,7 @@ public class JobConsumerThread extends Thread {
 	}
 
 	private void execute(Job job) {
+		int count = 0;
 		for (int i = 0; i < job.getTaskSize(); i++) {
 			Task task = job.getTask(i);
 			ControlMessage message = new ControlMessage(job.getJobId()+"",
@@ -43,9 +45,13 @@ public class JobConsumerThread extends Thread {
 			if(!isSuccess){
 				System.out.println("JobConsumer send control message failed:"+message);
 			}
+			else{
+				count ++;
+			}
 		}
-		for(int i = 0; i< job.getTaskSize(); i++){			
-			System.out.println("Master dispatch task: "+ job.getTask(i));
+		if(count != 0){
+			System.out.println("Job:"+job.getJobId()+" send "+count+"　tasks successful");
+			TaskCounterManager.getInstance().sendPut(job.getJobId()+"", count);
 		}
 	}
 
