@@ -159,7 +159,10 @@ public class UploadServerHandler extends SimpleChannelInboundHandler<HttpObject>
             if (fileUpload.isCompleted()) {
             	String jobId = uri.substring("result_".length());
             	TaskCounterManager.getInstance().receive(jobId);
-            	int count = TaskCounterManager.getInstance().getReceiveCount(jobId);
+            	int count = 0;
+            	synchronized (UploadServerHandler.class) {					
+            		count = TaskCounterManager.getInstance().getReceiveCount(jobId);
+				}
             	
 				StringBuffer fileNameBuf = new StringBuffer();
 				File dir = new File(DiskFileUpload.baseDirectory+jobId);
