@@ -85,6 +85,13 @@ public class JobXmlReader extends XmlReader{
 						task.setJarName(jarElement.getTextTrim());
 					}
 					task.setClassName(property.element("method").getTextTrim());
+					Element uploadElement = property.element("isUpload");
+					if(uploadElement != null){
+						task.setUpload(Boolean.valueOf(uploadElement.getTextTrim()));
+					}
+					else{
+						task.setUpload(false);
+					}
 					@SuppressWarnings("unchecked")
 					Iterator<Element> iterator = property.elementIterator("params");
 					while(iterator.hasNext()){

@@ -37,6 +37,7 @@ public class JobConsumerThread extends Thread {
 
 	private void execute(Job job) {
 		int count = 0;
+		int receivveCount = 0;
 		for (int i = 0; i < job.getTaskSize(); i++) {
 			Task task = job.getTask(i);
 			ControlMessage message = new ControlMessage(job.getJobId()+"",
@@ -47,11 +48,16 @@ public class JobConsumerThread extends Thread {
 			}
 			else{
 				count ++;
+				if(task.isUpload()){
+					receivveCount++;
+				}
 			}
 		}
-		if(count != 0){
+		if(receivveCount != 0){
 			System.out.println("Job:"+job.getJobId()+" send "+count+"　tasks successful");
-			TaskCounterManager.getInstance().sendPut(job.getJobId()+"", count);
+			System.out.println("Need upload task number is "+receivveCount);
+//			TaskCounterManager.getInstance().sendPut(job.getJobId()+"", count);
+			TaskCounterManager.getInstance().sendPut(job.getJobId()+"", receivveCount);
 		}
 	}
 

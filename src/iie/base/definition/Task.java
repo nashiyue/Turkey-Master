@@ -18,6 +18,8 @@ public class Task {
 	//如果允许Task分发到其他节点，则其条件和具体信息
 	private Allows allows;
 	
+	private boolean isUpload;
+	
 	public static Task getInstance(String toStringContent) throws Exception{
 		Task task = new Task();
 		String[] contents = toStringContent.split(",");
@@ -35,10 +37,16 @@ public class Task {
 					task.setClassName(kv[1]);
 					break;
 				case "params":
-					String[] params = kv[1].split(" ");
-					for(String p :params){
-						task.addParam(Param.getInstance(p));
+					if(kv.length==1||kv[1].trim().equals("")){
+						//do nothing
 					}
+					else{
+						String[] params = kv[1].split(" ");
+						for(String p :params){
+							task.addParam(Param.getInstance(p));
+						}
+					}
+					
 					break;
 				case "allow":
 					if(kv[1].trim().equals("no")){
@@ -47,6 +55,9 @@ public class Task {
 					else{
 						task.setAllows(Allows.getInstance(kv[1]));						
 					}
+					break;
+				case "isUpload":
+					task.setUpload(Boolean.valueOf(kv[1].trim()));
 					break;
 				default:
 					break;
@@ -75,11 +86,13 @@ public class Task {
 	
 	private Task(){
 		paramList = new LinkedList<Param>();
+		allows = new Allows();
 	}
 	
 	public Task(String bladeName){
 		this.bladeName = bladeName;
 		paramList = new LinkedList<Param>();
+		allows = new Allows();
 	}
 
 	public String getBladeName() {
@@ -124,6 +137,21 @@ public class Task {
 			result = result + p.key +"="+p.value+" ";
 		}
 		result += ","+allows.toString();
+		result += ",isUpload:"+isUpload;
 		return result;
 	}
+
+	public boolean isUpload() {
+		return isUpload;
+	}
+
+	public void setUpload(boolean isUpload) {
+		this.isUpload = isUpload;
+	}
+	
+//	public static void main(String[] args) throws Exception {
+//		Task task = new Task("192.168.11.52");
+//		System.out.println(task);
+//		System.out.println(Task.getInstance("blade:192.168.11.52,jar:null,class:null,params:,allow:no,isUpload:false"));
+//	}
 }
